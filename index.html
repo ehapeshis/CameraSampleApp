@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Camera app</title>
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="Assets/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<link href="css/style.css" rel="stylesheet">
+
+	<script src="Assets/js/app.js"></script>
+	<script src="Assets/js/controller.js"></script>
+
+</head>
+
+<body ng-app="app">
+
+	<div class="container">
+		<nav class="navbar navbar-default">			
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Logo</a>
+			</div>
+			
+			<div class="collapse navbar-collapse js-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cameras 
+							<i class="fa fa-angle-down" aria-hidden="true"></i>
+						</a>
+
+						<ul class="dropdown-menu mega-dropdown-menu row">
+							<li>
+								<a href="#">Example 1</a>
+							</li>
+							<li>
+								<a href="#">Example 2</a>
+							</li>
+							<li>
+								<a href="#">Example 3</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container" ng-controller="myCtrl"> 
+		<div class="main">
+			<div class="row controlsBar">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-success pull-right center-block"  ng-click="add()">
+						Add Camera   <i class="fa fa-plus" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-warning pull-right center-block editBtn"  ng-click="edit = !edit">
+						Edit Cameras   <i class="fa fa-pencil" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+			
+
+			<!--View Mode-->
+			<div class="col-md-12" ng-hide="edit">
+				<div class="col-md-4" ng-repeat="camera in data.cameras track by $index">
+					<button type="button" class="btn btn-danger pull-right center-block"  ng-click="delete($index)">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</button>
+					<div class="thumbnail">
+						<img src="Assets/images/camera.jpg" style="width:100%">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<!--Name-->
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p>Name : </p>
+									</div>
+									<div class="col-md-8">
+										<p><span class="pull-right">{{camera.name}}</span></p>
+									</div>
+								</div>
+								<!--Quality-->
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p>Quality : </p>
+									</div>
+									<div class="col-md-8">
+										<p><span class="pull-right">{{camera.quality}}</span></p>
+									</div>
+								</div>
+								<!--Memory-->
+								<div class="col-md-12">
+									<div class="col-md-6">
+										<p ng-hide="editMode">Memory : </p>
+									</div>
+									<div class="col-md-6">
+										<p><span class="pull-right">{{camera.memory}}</span></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12" ng-hide="!edit">
+				<div class="col-md-4" ng-repeat="camera in data.cameras track by $index">
+					<button type="button" class="btn btn-danger pull-right center-block"  ng-click="delete($index)">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</button>
+					<!--View Mode-->
+					<div class="thumbnail">
+						<img src="Assets/images/camera.jpg" style="width:100%">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<!--Name-->
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p>Name : </p>
+									</div>
+									<div class="col-md-8">
+										<input type="text" ng-model="camera.name"/>
+									</div>
+								</div>
+								<!--Quality-->
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p>Quality : </p>
+									</div>
+									<div class="col-md-8">
+										<input type="text" ng-model="camera.quality"/>
+									</div>
+								</div>
+								<!--Memory-->
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p ng-hide="editMode">Memory : </p>
+									</div>
+									<div class="col-md-8">
+										<input type="text" ng-model="camera.memory"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
